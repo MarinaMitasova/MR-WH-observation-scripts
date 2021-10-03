@@ -7,22 +7,25 @@ allQues.each(function(i, e){
 			$("#" + id + "_other").val("none");
 		}
 	}else if ($(e).hasClass("select") && $(e).find("[type='checkbox']").length){
-		if ($(e).find("[id^=dopcheck]").length){
+		/* if ($(e).find("[id^=dopcheck]").length){
 			$(e).find("[type='checkbox']").prop("checked", false);
 			$(e).find(".red_checkbox").css("background", "#fafafa");
-		}else{
+		}else{ */
 			$(e).find("[type='checkbox']:first").prop("checked", true);
 			var id = $(e).find("[type='checkbox']:first").attr("id");
 			if ($("#" + id + "_other").length){
 				$("#" + id + "_other").val("none");
 			}
-		}
+		//}
 	}if ($(e).hasClass("select") && $(e).find("select").length){
 		$(e).find("select").val(1);
 	}else if ($(e).hasClass("grid") && $(e).find("[id^='q5x1x1p']").length){
 		$(e).find("[type='text']").val("none");
 		$(e).find("[type='checkbox'][id$='_c4']").prop("checked", true);
 	}else if ($(e).hasClass("grid") && $(e).find("[id^='q5x1x1Ap']").length){
+		$(e).find("[type='text']").val("none");
+		$(e).find("[type='checkbox'][id$='_c4']").prop("checked", true);
+	}else if ($(e).hasClass("grid") && $(e).find("[id^='q5x1x2p']").length){
 		$(e).find("[type='text']").val("none");
 		$(e).find("[type='checkbox'][id$='_c4']").prop("checked", true);
 	}else if ($(e).hasClass("grid") && $(e).find("[type='checkbox']").length){
@@ -50,6 +53,13 @@ for (var i = 1; i<=3; i++){
 			return false;
 		}
 	}
+	if ($("#q5x1x2p"+i).length && $("#q5x1x2p"+i).is(":visible")){
+		if ( !$("#q5x1x2p"+i).find("[type='checkbox']:checked").length ){
+			alert("Укажите ответ в вопросе 5.1.2 Детейлинга №"+i);
+			$("#q5x1x2p"+i).find("[type='checkbox']:visible:first").focus();
+			return false;
+		}
+	}
 }
 
 var res = true;
@@ -65,6 +75,18 @@ $("[id^=q5x1x1p][type='text']:visible, [id^=q5x1x1Ap][type='text']:visible").eac
 	}
 })
 if (!res) return false;
+$("[id^=q5x1x2p][type='text']:visible").each(function(){
+	var tmp = this.id.split("_")
+	var answ = $("#"+tmp[0]).find("[type='checkbox'][id*="+tmp[1]+"]").not("[id$='_c5']")
+	if ($(this).val() != "" && answ.filter(":checked").length == 0){
+		alert("Укажите ответ в вопросе 5.1.2");
+		answ.eq(0).focus();
+		answ.parents("tr:first").addClass("not_answered")
+		res = false;
+		return false;
+	}
+})
+if (!res) return false;
 
 var res = true;
 $("[id^=q5x1x1p][type='checkbox'][id$='_c5']:visible, [id^=q5x1x1Ap][type='checkbox'][id$='_c5']:visible").each(function(){
@@ -72,6 +94,18 @@ $("[id^=q5x1x1p][type='checkbox'][id$='_c5']:visible, [id^=q5x1x1Ap][type='check
 	var answ = $("#"+tmp[0]).find("[type='checkbox'][id*="+tmp[1]+"]").not("[id$='_c5']")
 	if ($(this).prop("checked") && answ.filter(":checked").length == 0){
 		alert("Укажите ответ в вопросе 5.1.1");
+		answ.eq(0).focus();
+		answ.parents("tr:first").addClass("not_answered")
+		res = false;
+		return false;
+	}
+})
+if (!res) return false;
+$("[id^=q5x1x2p][type='checkbox'][id$='_c5']:visible").each(function(){
+	var tmp = this.id.split("_")
+	var answ = $("#"+tmp[0]).find("[type='checkbox'][id*="+tmp[1]+"]").not("[id$='_c5']")
+	if ($(this).prop("checked") && answ.filter(":checked").length == 0){
+		alert("Укажите ответ в вопросе 5.1.2");
 		answ.eq(0).focus();
 		answ.parents("tr:first").addClass("not_answered")
 		res = false;

@@ -230,6 +230,17 @@ $(window).on("load", function() {
 				$(".block" + k).html("");
 				$("#headBLx" + k).html("");
 			}
+
+			$("#q7x2p" + k).parent().removeClass("hidden").show();
+			$("#q7x2p" + k).prev().removeClass("hidden").show();
+			
+			$("#q7x2x0p" + k).parent().removeClass("hidden").show();
+			$("#q7x2x0p" + k).prev().removeClass("hidden").show();
+			$("#q7x2x1p" + k).parent().removeClass("hidden").show();
+			$("#q7x2x1p" + k).prev().removeClass("hidden").show();
+			$("#q7x2x2p" + k).parent().removeClass("hidden").show();
+			$("#q7x2x2p" + k).prev().removeClass("hidden").show();
+
 		}else{
 			$("#isReminderP" + k + "_1").prop("checked", false);
 			
@@ -242,18 +253,6 @@ $(window).on("load", function() {
 			$("#" + dopcheck).find("[type='checkbox']").prop("checked", false);
 			$("#" + dopcheck).find(".red_checkbox").css("background", "#fafafa");
 
-			var q = "q7x2Ap" + k, dopcheck = "dopcheckq7x2Ap" + k;
-			$("#" + q + ", #" + dopcheck).hide();
-			$("#" + q).find("[type='radio']:last").prop("checked", true);
-			$("#" + dopcheck).find("[type='checkbox']").prop("checked", false);
-			$("#" + dopcheck).find(".red_checkbox").css("background", "#fafafa");
-
-			var q = "q7x2x3p" + k, dopcheck = "dopcheckq7x2x3p" + k;
-			$("#" + q + ", #" + dopcheck).hide();
-			$("#" + q).find("[type='radio']:last").prop("checked", false);
-			$("#" + q).find("[type='text']").val("none");
-			$("#" + dopcheck).find("[type='checkbox']").prop("checked", false);
-			$("#" + dopcheck).find(".red_checkbox").css("background", "#fafafa");
 			
 			$("#q3x2p" + k).parent().show();
 			$("#q3x2p" + k).find("[type='radio']").prop("checked", false);
@@ -261,15 +260,25 @@ $(window).on("load", function() {
 			$(".block" + k).html("");
 			$("#headBLx" + k).html("");
 			
-			var q0 = allQues.index($("#q9x8p" + k).parent()),
-				qL = allQues.index($("#q9x8p" + k).parent());
-			allQues.each(function(i, e){
-				if (i >= q0 && i <= qL){
-					$(e).removeClass("hidden").show();
-					$(e).prev().removeClass("hidden").show();
-				}
-			});
+			$("#q9x8p" + k).parent().removeClass("hidden").show();
+			$("#q9x8p" + k).parent().prev().removeClass("hidden").show();
+			
 		}
+
+		//скрываем в любом случае
+		var q = "q7x2Ap" + k, dopcheck = "dopcheckq7x2Ap" + k;
+		$("#" + q + ", #" + dopcheck).hide();
+		$("#" + q).find("[type='radio']:last").prop("checked", true);
+		$("#" + dopcheck).find("[type='checkbox']").prop("checked", false);
+		$("#" + dopcheck).find(".red_checkbox").css("background", "#fafafa");
+
+		var q = "q7x2x3p" + k, dopcheck = "dopcheckq7x2x3p" + k;
+		$("#" + q + ", #" + dopcheck).hide();
+		$("#" + q).find("[type='radio']:last").prop("checked", false);
+		$("#" + q).find("[type='text']").val("none");
+		$("#" + dopcheck).find("[type='checkbox']").prop("checked", false);
+		$("#" + dopcheck).find(".red_checkbox").css("background", "#fafafa");
+
 	});	
 
 	//Портрет не обсуждался + визит для галочки
@@ -284,6 +293,30 @@ $(window).on("load", function() {
 			}
 		}else{
 			$("#q7x2p" + k + "_4").prop("disabled", true).prop("checked", false);
+		}
+
+		if ($("#isReminderP_"+k).prop("checked")){
+			var q = "#q7x2Ap"+k, dopcheck = "#dopcheckq7x2Ap"+k;
+			if ($(q).is(":hidden")){
+				$(q).show();
+				$(q).find("[type='radio']").prop("checked", false);
+				$(dopcheck + "_1").prop("checked", false);
+				$(dopcheck + " .red_checkbox").css("background", "#fafafa");
+			}
+		}else{
+			var q = "#q7x2Ap"+k, dopcheck = "#dopcheckq7x2Ap"+k;
+			$(q).hide();
+			$(q).find("[type='radio']").prop("checked", false);
+			$(q).find("[type='radio']:first").prop("checked", true);
+			$(dopcheck + "_1").prop("checked", false);
+			$(dopcheck + " .red_checkbox").css("background", "#fafafa");
+			
+			var q = "q7x2x3p" + k, dopcheck = "dopcheckq7x2x3p" + k;
+			$("#" + q).hide();
+			$("#" + q).find("[type='radio']:first").prop("checked", true);
+			$("#" + q).find("[type='text']").val("")
+			$("#" + dopcheck).find("[type='checkbox']").prop("checked", false);
+			$("#" + dopcheck).find(".red_checkbox").css("background", "#fafafa");
 		}
 	}
 	$("[id^='q7x2p'][type='radio']").on("click", function(){
@@ -412,47 +445,10 @@ $(window).on("load", function() {
 				$("#" + dopcheck).find(".red_checkbox").css("background", "#fafafa");	
 			}
 
-			var q = "q7x2Ap" + k, dopcheck = "dopcheckq7x2Ap" + k;
-			if ($("#" + q).is(":hidden")){
-				$("#" + q + ", #" + dopcheck).show();
-				$("#" + q).find("[type='radio']").prop("checked", false);
-				$("#" + dopcheck).find("[type='checkbox']").prop("checked", false);
-				$("#" + dopcheck).find(".red_checkbox").css("background", "#fafafa");	
-			}
-
-			var q = "q7x2x3p" + k, dopcheck = "dopcheckq7x2x3p" + k;
-			if ($("#q7x2Ap"+k+"_2").prop("checked")) {
-				if ($("#" + q).is(":hidden")){
-					$("#" + q + ", #" + dopcheck).show();
-					$("#" + q).find("[type='radio']").prop("checked", false);
-					$("#" + q).find("[type='text']").val("");
-					$("#" + dopcheck).find("[type='checkbox']").prop("checked", false);
-					$("#" + dopcheck).find(".red_checkbox").css("background", "#fafafa");
-				}
-			} else {
-				$("#" + q + ", #" + dopcheck).hide();
-				$("#" + q).find("[type='radio']:last").prop("checked", true);
-				$("#" + q).find("[type='text']").val("none");
-				$("#" + dopcheck).find("[type='checkbox']").prop("checked", false);
-				$("#" + dopcheck).find(".red_checkbox").css("background", "#fafafa");
-			}
 		} else {
 			var q = "q7x2x0p" + k, dopcheck = "dopcheckq7x2x0p" + k;
 			$("#" + q + ", #" + dopcheck).hide();
 			$("#" + q).find("[type='radio']:last").prop("checked", true);
-			$("#" + dopcheck).find("[type='checkbox']").prop("checked", false);
-			$("#" + dopcheck).find(".red_checkbox").css("background", "#fafafa");
-
-			var q = "q7x2Ap" + k, dopcheck = "dopcheckq7x2Ap" + k;
-			$("#" + q + ", #" + dopcheck).hide();
-			$("#" + q).find("[type='radio']:last").prop("checked", true);
-			$("#" + dopcheck).find("[type='checkbox']").prop("checked", false);
-			$("#" + dopcheck).find(".red_checkbox").css("background", "#fafafa");
-
-			var q = "q7x2x3p" + k, dopcheck = "dopcheckq7x2x3p" + k;
-			$("#" + q + ", #" + dopcheck).hide();
-			$("#" + q).find("[type='radio']:last").prop("checked", true);
-			$("#" + q).find("[type='text']").val("none");
 			$("#" + dopcheck).find("[type='checkbox']").prop("checked", false);
 			$("#" + dopcheck).find(".red_checkbox").css("background", "#fafafa");
 		}
@@ -1001,22 +997,8 @@ $(window).on("load", function() {
 					$(this).parents("tr:first").show();
 				}
 			}
-			/* if (n_portr >= 1 && n_portr <= 7 || n_portr >= 10 && n_portr <= 11){
-				if (gr_i == 14){
-					$(this).parents("tr:first").show();
-				}
-			} */
-			/* if (n_portr >= 1 && n_portr <= 8 || n_portr >= 10 && n_portr <= 11){
-				if (gr_i == 15 || gr_i == 17){
-					$(this).parents("tr:first").show();
-				}
-			}
-			if (n_portr >= 1 && n_portr <= 11){
-				if (gr_i == 16){
-					$(this).parents("tr:first").show();
-				}
-			} */
-
+			
+			// Последние 4 ИР всем показываем
 			if (gr_i >= 14 && gr_i<= 17){
 				$(this).parents("tr:first").show();
 			}
@@ -1804,10 +1786,9 @@ $(window).on("load", function() {
 
 			q = "q5x1x2p" + bl, dopcheck = "dopcheckq5x1x2p" + bl;
 			$("#" + q + ", #" + dopcheck).hide();
-			$("#" + q).find("[type='text']").val("");
-			$("#" + q).find("[type='text']:first").val("none");
+			$("#" + q).find("[type='text']").val("none");
 			$("#" + q).find("[type='checkbox']").prop("checked", false);
-			$("#" + q).find("[type='checkbox']:first").prop("checked", true);
+			$("#" + q).find("[type='checkbox'][id$='_c4']").prop("checked", true);
 			$("#" + dopcheck).find("[type='checkbox']").prop("checked", false);
 			$("#" + dopcheck).find(".red_checkbox").css("background", "#fafafa");
 			
@@ -1884,17 +1865,16 @@ $(window).on("load", function() {
 				if ($("#" + q).is(":hidden")){
 					$("#" + q + ", #" + dopcheck).show();
 					$("#" + q).find("[type='text']").val("");
-					$("#" + q).find("[type='checkbox']:first").prop("checked", false);
+					$("#" + q).find("[type='checkbox']").prop("checked", false);
 					$("#" + dopcheck).find("[type='checkbox']").prop("checked", false);
 					$("#" + dopcheck).find(".red_checkbox").css("background", "#fafafa");
 				}
 			}else{
 				q = "q5x1x2p" + bl, dopcheck = "dopcheckq5x1x2p" + bl;
 				$("#" + q + ", #" + dopcheck).hide();
-				$("#" + q).find("[type='text']").val("");
-				$("#" + q).find("[type='text']:first").val("none");
+				$("#" + q).find("[type='text']").val("none");
 				$("#" + q).find("[type='checkbox']").prop("checked", false);
-				$("#" + q).find("[type='checkbox']:first").prop("checked", false);
+				$("#" + q + " [id$='_c4']").prop("checked", true);
 				$("#" + dopcheck).find("[type='checkbox']").prop("checked", false);
 				$("#" + dopcheck).find(".red_checkbox").css("background", "#fafafa");
 			}
@@ -2358,8 +2338,8 @@ $(window).on("load", function() {
 		port6:	[2, 9, 14, 20, 29, 35, 36, 39, 41],
 		port7:	[2, 4, 13, 17, 25, 31],
 		port8:	[2, 3, 15, 19, 26, 32, 37],
-		port9:	[],
-		port10:	[]
+		port9:	[999],
+		port10:	[999]
 	}	
 	
 	var port_ins2 = {
@@ -2371,8 +2351,8 @@ $(window).on("load", function() {
 		port6:	[7, 9, 17, 20, 28, 34, 39],
 		port7:	[2, 8, 17, 25, 29, 36],
 		port8:	[1, 12, 15, 21, 27, 35, 37, 40, 41],
-		port9:	[],
-		port10:	[]
+		port9:	[999],
+		port10:	[999]
 	}
 	var KM_port = {	
 		port1:	[57, 58, 59, 60, 61, 62, 63, 64, 65, 66],
@@ -2515,6 +2495,7 @@ $(window).on("load", function() {
 			var data = elems.filter(":visible")
 				.add("[type='checkbox'][id^='q3x4p'], [type='checkbox'][id^='q7x3p']")
 				.add("[type='checkbox'][id^='q4x1p']")
+				.add("[type='text'][id^='q3x4p'], [type='text'][id^='q7x3p']")
 				.serialize();
 				
 			if (data) {
@@ -2558,6 +2539,7 @@ $(window).on("load", function() {
 		var local_data = elems.filter(":visible")
 			.add("[type='checkbox'][id^='q3x4p'], [type='checkbox'][id^='q7x3p']")
 			.add("[type='checkbox'][id^='q4x1p']")
+			.add("[type='text'][id^='q3x4p'], [type='text'][id^='q7x3p']")
 			.serialize();
 		
 		data_surv["data"].push({
@@ -2645,11 +2627,13 @@ $(window).on("load", function() {
 				$(this).parents(".question_body").removeClass("not_answered");
 			}
 		});
-	}else{
+	}/* else{
 		for (k = 3; k<=cntBlock; k++){
 			$("#hideBlockP" + k + "_1").prop("checked", false).click();
 		}
-	}
+	} 
+	// Убрала, с этой галкой косячно данные загружаются в 3-й детейлинг прт повторном открытии
+	*/
 	
 	radioCheckbox.on("click", function(){
 		q = $(this).parents(".question").attr("id");
